@@ -6,8 +6,9 @@
             @endforeach
         </ul>
     </div>
-@else
+@endif
+@if (session('success'))
     <div class="alert alert-success">
-        Record eliminato
+        {{ session('success') }}
     </div>
 @endif

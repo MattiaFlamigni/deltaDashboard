@@ -59,6 +59,7 @@ class CuriosityController extends Controller
             "description" => $request->description,
         ];
         $curiosity->update($data);
+        session()->flash('success', 'Curiosità aggiornata con successo');
         return redirect("/curiosity");
     }
 
@@ -68,6 +69,8 @@ class CuriosityController extends Controller
     public function destroy(string $id)
     {
         Curiosity::destroy($id);
+
+        session()->flash('success', 'Curiosità eliminata con successo');
         return redirect('/curiosity');
     }
 }

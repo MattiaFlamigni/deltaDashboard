@@ -1,6 +1,7 @@
 @extends("templates.default")
 
 @section("content")
+    @include("partials.displayErrors")
     <table class="table">
         <thead>
         <tr>
