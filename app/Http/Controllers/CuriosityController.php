@@ -29,7 +29,14 @@ class CuriosityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+      Curiosity::create($request->all());
+      session()->flash('success', 'Curiosità creata con successo');
+      return redirect("/curiosity");
     }
 
     /**
@@ -53,6 +60,12 @@ class CuriosityController extends Controller
      */
     public function update(Request $request, Curiosity $curiosity)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+
         $data = [
             "title" => $request->title,
             "subtitle" => $request->subtitle,
