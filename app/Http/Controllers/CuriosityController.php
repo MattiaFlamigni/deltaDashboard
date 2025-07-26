@@ -12,7 +12,7 @@ class CuriosityController extends Controller
      */
     public function index()
     {
-        $curiosity = Curiosity::all();
+        $curiosity = Curiosity::paginate(10);
         return view('curiosity.curiosity', ["curiosity"=> $curiosity]);
     }
 

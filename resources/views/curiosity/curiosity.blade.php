@@ -34,4 +34,8 @@
         @endforeach
         </tbody>
     </table>
+    {{ $curiosity->links('vendor.pagination.bootstrap-5') }}
 @endsection
+
+
+
