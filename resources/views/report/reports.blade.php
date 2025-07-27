@@ -28,7 +28,9 @@
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $report->data }}</td>
                             <td>
-                                <img src="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}" width="60" height="60" alt="img">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}">
+                                    <img src="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}" width="60" height="60" alt="img" style="cursor:pointer;">
+                                </a>
                             </td>
                             <td>{{ $report->comment }}</td>
                             <td>{{ $report->type }}</td>
@@ -76,7 +78,9 @@
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $report->data }}</td>
                             <td>
-                                <img src="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}" width="60" height="60" alt="img">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}">
+                                    <img src="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}" width="60" height="60" alt="img" style="cursor:pointer;">
+                                </a>
                             </td>
                             <td>{{ $report->comment }}</td>
                             <td>{{ $report->type }}</td>
@@ -103,4 +107,8 @@
             </div>
         </div>
     </div>
+
+
+
+    @include("partials.resizeImage")
 @endsection
