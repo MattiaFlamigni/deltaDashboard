@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CuriosityController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReportsController;
 use App\Models\Curiosity;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -15,3 +17,4 @@ Route::get('/prova-db', function () {
 });
 
 Route::resource( 'curiosity', CuriosityController::class);
+Route::resource( 'reports', ReportController::class);
