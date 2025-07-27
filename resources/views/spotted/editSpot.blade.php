@@ -1,25 +1,35 @@
 @extends("templates.default")
 
 @section("content")
-    <form method="POST" action="{{route("curiosity.update", $cur->id)}}">
+    <form method="POST" action="{{route("spotted.update", $spotted->id)}}">
         @csrf
         @method("PATCH")
 
         <div class="mb-3">
-            <label for="title">Titolo</label>
-            <input class="form-control" type="text" name="title" id="title" value="{{$cur->title}} ">
+            <label for="comment">Comment</label>
+            <textarea class="form-control" name="comment" id="comment" cols="30"
+                      rows="10">{{$spotted->comment}}</textarea>
         </div>
 
         <div class="mb-3">
-            <label for="subtitle">SubTitle</label>
-            <input class="form-control" type="text" name="subtitle" id="subtitle" value="{{$cur->subtitle}} ">
+            <label for="category" class="form-label fw-semibold">Category</label>
+            <select name="category" id="category" class="form-select" aria-label="Select category" required>
+                <option value="" disabled selected>Seleziona una categoria</option>
+                @foreach($categorie as $cat)
+                    <option value="{{ $cat }}" @if($cat->nome == $spotted->category) selected @endif>{{ $cat->nome }}</option>
+                @endforeach
+            </select>
+            <div class="form-text">Scegli la categoria appropriata.</div>
         </div>
 
+
+
         <div class="mb-3">
-            <label for="description">Description</label>
-            <textarea class="form-control" name="description" id="description" cols="30"
-                      rows="10">{{$cur->description}}</textarea>
+            <label for="subCategory">subCategory</label>
+            <input class="form-control" type="text" name="subCategory" id="subCategory" value="{{$spotted->subCategory}} ">
         </div>
+
+
 
         <div class="form-group">
             <button class="btn btn-primary">Invia</button>
