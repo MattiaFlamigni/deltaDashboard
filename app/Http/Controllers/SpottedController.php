@@ -14,7 +14,7 @@ class SpottedController extends Controller
     public function index()
     {
         $spotted = Spotted::orderBy("data", "desc")->paginate(10);
-        return view("spotted.spotted", ["spotted"=>$spotted]);
+        return view("spotted.spotted", ["data"=>$spotted]);
     }
 
     /**
