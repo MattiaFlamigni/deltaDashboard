@@ -38,7 +38,7 @@ Route::get('/dashboard/detail', function (Request $request) {
     switch ($filter) {
         case 'users':
             $title = "Tutti gli utenti";
-            $data =  SupabaseUser::all();
+            $data =  SupabaseUser::orderBy("username", "asc")->paginate(10);
             $view = "partials.usersTable";
             break;
 
@@ -48,18 +48,18 @@ Route::get('/dashboard/detail', function (Request $request) {
             $usersID =Point::whereBetween('created_at', [$startOfMonth, $endOfMonth])
                 ->distinct('userID')       // prendi solo userID distinti
                 ->pluck('userID');
-            $data = SupabaseUser::whereIn('id', $usersID)->get();
+            $data = SupabaseUser::whereIn('id', $usersID)->paginate(10);
             break;
 
         case 'spotted':
             $title = "Tutti gli avvistamenti";
-            $data = Spotted::all();
+            $data = Spotted::orderBy('data', 'desc')->paginate(10);;
             $view = "partials.spottedTable";
             break;
 
         case 'spottedMonth':
             $title = "Avvistamenti dell'ultimo mese";
-            $data = Spotted::whereBetween('data', [$startOfMonth, $endOfMonth])->get();
+            $data = Spotted::whereBetween('data', [$startOfMonth, $endOfMonth])->paginate(10);
             $view = "partials.spottedTable";
             break;
 
