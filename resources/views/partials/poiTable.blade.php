@@ -13,6 +13,7 @@
                     <th>Descrizione</th>
                     <th>Posizione</th>
                     <th>Categoria</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,6 +44,15 @@
                                 <span class="badge bg-info text-dark">
                                     {{ $poi->category ?? 'N/A' }}
                                 </span>
+                        </td>
+                        <td>
+                            <form action="{{route("poi.destroy", $poi)}}" method="POST">
+                                @csrf
+                                @method("DELETE")
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Elimina">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

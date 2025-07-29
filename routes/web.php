@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CuriosityController;
+use App\Http\Controllers\PoiController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SpottedController;
@@ -86,3 +87,4 @@ Route::get('/prova-db', function () {
 Route::resource( 'curiosity', CuriosityController::class);
 Route::resource( 'reports', ReportController::class);
 Route::resource( 'spotted', SpottedController::class);
+Route::resource("poi", PoiController::class);

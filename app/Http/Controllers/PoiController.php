@@ -60,6 +60,8 @@ class PoiController extends Controller
      */
     public function destroy(Poi $poi)
     {
-        //
+        $poi->delete();
+        session()->flash('success', 'POI eliminato con successo');
+        return redirect("/");
     }
 }
