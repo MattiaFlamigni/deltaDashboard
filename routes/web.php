@@ -31,7 +31,7 @@ Route::get('/', function () {
 
     $poi = Poi::all();
     return view('dashboard.dashboard', ["users"=>$users, "activeUsers"=>$activeUsers, "spotted"=>$spotted, "spottedMonth"=>$spottedMonth, "poi"=>$poi]);
-});
+})->name('dashboard.index');
 Route::get('/dashboard/detail', function (Request $request) {
     $startOfMonth = Carbon::now()->startOfMonth();
     $endOfMonth = Carbon::now()->endOfMonth();
