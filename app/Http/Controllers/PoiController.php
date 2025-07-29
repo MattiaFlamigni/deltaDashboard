@@ -74,6 +74,7 @@ class PoiController extends Controller
         $poi->location = $location;
 
         $poi->save();
+        session()->flash('success', 'POI modificato con successo');
         return redirect("/");
     }
 
