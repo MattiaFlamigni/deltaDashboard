@@ -44,7 +44,7 @@ class PoiController extends Controller
      */
     public function edit(Poi $poi)
     {
-        //
+        return view("dashboard.poiEdit", ["poi" => $poi]);
     }
 
     /**
@@ -52,7 +52,13 @@ class PoiController extends Controller
      */
     public function update(Request $request, Poi $poi)
     {
-        //
+        $validatedData = $request->validate([
+            "title" => "required",
+            "description" => "required",
+        ]);
+
+        $poi->update($validatedData);
+        return redirect("/");
     }
 
     /**

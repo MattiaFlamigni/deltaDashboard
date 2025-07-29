@@ -9,4 +9,6 @@ class Poi extends Model
     protected $table = 'poi';
     protected $primaryKey = 'id';
     protected $fillable = ["location", "title", "description","category", "image_url"];
+
+    public $timestamps = false;
 }

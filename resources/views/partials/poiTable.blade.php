@@ -46,6 +46,7 @@
                                 </span>
                         </td>
                         <td>
+                            <a href="{{ route('poi.edit', ["poi"=>$poi]) }}"> <i class="bi bi-pencil-fill"></i></a>
                             <form action="{{route("poi.destroy", $poi)}}" method="POST">
                                 @csrf
                                 @method("DELETE")
