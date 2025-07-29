@@ -20,7 +20,8 @@ class PoiController extends Controller
      */
     public function create()
     {
-        //
+        $categorie = Poi::distinct()->pluck('category');
+        return view("dashboard.createPoi", ["categorie" => $categorie]);
     }
 
     /**
@@ -28,8 +29,30 @@ class PoiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            "title" => "required|string",
+            "description" => "required|string",
+            "category" => "required",
+            "latitude" => "required|numeric",
+            "longitude" => "required|numeric",
+        ]);
+
+        $location = json_encode([
+            'latitude' => $validatedData['latitude'],
+            'longitude' => $validatedData['longitude'],
+        ]);
+
+        Poi::create([
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
+            'category' => $validatedData['category'],
+            'location' => $location,
+        ]);
+
+        session()->flash("success", "Poi creato con succeso");
+        return redirect("/");
     }
+
 
     /**
      * Display the specified resource.
