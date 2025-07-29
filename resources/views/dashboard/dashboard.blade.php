@@ -94,9 +94,16 @@
         @include("partials.charts")
 
         @include("partials.poiTable", ["data"=> $poi])
+
+        <a href="{{ route('poi.create') }}"
+           class="btn btn-primary rounded-circle shadow position-fixed"
+           style="bottom: 30px; right: 30px; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+            <i class="bi bi-plus-lg fs-3"></i>
+        </a>
+
     </div>
 
-    <button><a href="{{route("poi.create")}}">Aggiungi POI</a></button>
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
