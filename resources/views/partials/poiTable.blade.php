@@ -13,7 +13,7 @@
                     <th>Descrizione</th>
                     <th>Posizione</th>
                     <th>Categoria</th>
-                    <th>Actions</th>
+                    <th style="width: 120px;">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,9 +26,9 @@
                         <td>{{ $loop->iteration }}</td>
                         <td><strong>{{ $poi->title }}</strong></td>
                         <td>
-                                <span title="{{ $poi->description }}">
-                                    {{ $desc }}
-                                </span>
+                            <span title="{{ $poi->description }}">
+                                {{ $desc }}
+                            </span>
                         </td>
                         <td>
                             @if($loc)
@@ -41,19 +41,23 @@
                             @endif
                         </td>
                         <td>
-                                <span class="badge bg-info text-dark">
-                                    {{ $poi->category ?? 'N/A' }}
-                                </span>
+                            <span class="badge bg-info text-dark">
+                                {{ $poi->category ?? 'N/A' }}
+                            </span>
                         </td>
                         <td>
-                            <a href="{{ route('poi.edit', ["poi"=>$poi]) }}"> <i class="bi bi-pencil-fill"></i></a>
-                            <form action="{{route("poi.destroy", $poi)}}" method="POST">
-                                @csrf
-                                @method("DELETE")
-                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Elimina">
-                                    <i class="bi bi-trash-fill"></i>
-                                </button>
-                            </form>
+                            <div class="d-flex gap-2">
+                                <a href="{{ route('poi.edit', $poi) }}" class="btn btn-sm btn-outline-primary" title="Modifica">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </a>
+                                <form action="{{ route('poi.destroy', $poi) }}" method="POST" onsubmit="return confirm('Sei sicuro di voler eliminare questo punto di interesse?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Elimina">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
