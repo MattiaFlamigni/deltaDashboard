@@ -1,6 +1,7 @@
 @extends("templates.default")
 
 @section("content")
+    @include("partials.displayErrors")
     <form method="POST" action="{{route("spotted.update", $spotted->id)}}">
         @csrf
         @method("PATCH")
@@ -26,7 +27,11 @@
 
         <div class="mb-3">
             <label for="subCategory">subCategory</label>
-            <input class="form-control" type="text" name="subCategory" id="subCategory" value="{{$spotted->subCategory}} ">
+            <select name="subCategory">
+                @foreach($subCategory as $sub)
+                    <option value="{{$sub}}" @if($sub == $spotted->subCategory) selected @endif>{{$sub}}</option>
+                @endforeach
+            </select>
         </div>
 
 

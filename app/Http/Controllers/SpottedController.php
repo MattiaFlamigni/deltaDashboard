@@ -47,7 +47,8 @@ class SpottedController extends Controller
     public function edit(Spotted $spotted)
     {
         $categorie = categorie_animali::all();
-        return view("spotted.editSpot", ["spotted"=>$spotted, "categorie"=>$categorie]);
+        $subcategory = Spotted::distinct()->pluck("subCategory");
+        return view("spotted.editSpot", ["spotted"=>$spotted, "categorie"=>$categorie, "subCategory"=>$subcategory]);
     }
 
     /**
@@ -55,6 +56,10 @@ class SpottedController extends Controller
      */
     public function update(Request $request, Spotted $spotted)
     {
+        $validatedData = $request->validate([
+            "category" => "required",
+            "subCategory"=>"required"
+        ]);
         $spotted->update($request->all());
         session()->flash('success', 'Curiosità creata con successo');
         return redirect("/spotted");
