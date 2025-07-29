@@ -27,10 +27,9 @@
                     <!-- Categoria -->
                     <div class="mb-3">
                         <label for="category" class="form-label">Categoria</label>
-
-                        <select name="category" id="category" class="form-select" required>
+                        <select name="category">
                             @foreach($categorie as $cat)
-                            <option value="{{$cat}}"  @if($cat == $poi->category) selected @endif>{{$cat}}</option>
+                            <option value="{{$cat}}" @if($cat == $poi->category) selected @endif>{{$cat}}</option>
                             @endforeach
                         </select>
 
