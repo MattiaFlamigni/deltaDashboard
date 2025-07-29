@@ -53,13 +53,27 @@ class PoiController extends Controller
      */
     public function update(Request $request, Poi $poi)
     {
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             "title" => "required",
             "description" => "required",
             'category' => 'required|string',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
         ]);
 
-        $poi->update($validatedData);
+        // Crea il JSON per location
+        $location = json_encode([
+            'latitude' => $validated['latitude'],
+            'longitude' => $validated['longitude'],
+        ]);
+
+        // Aggiorna i campi
+        $poi->title = $validated['title'];
+        $poi->description = $validated['description'] ?? '';
+        $poi->category = $validated['category'];
+        $poi->location = $location;
+
+        $poi->save();
         return redirect("/");
     }
 
