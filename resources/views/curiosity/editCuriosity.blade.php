@@ -7,18 +7,18 @@
 
         <div class="mb-3">
             <label for="title">Titolo</label>
-            <input class="form-control" type="text" name="title" id="title" value="{{$cur->title}} ">
+            <input class="form-control" type="text" name="title" id="title" value="{{old("title", $cur->title)}} ">
         </div>
 
         <div class="mb-3">
             <label for="subtitle">SubTitle</label>
-            <input class="form-control" type="text" name="subtitle" id="subtitle" value="{{$cur->subtitle}} ">
+            <input class="form-control" type="text" name="subtitle" id="subtitle" value="{{old("subtitle", $cur->subtitle)}} ">
         </div>
 
         <div class="mb-3">
             <label for="description">Description</label>
             <textarea class="form-control" name="description" id="description" cols="30"
-                      rows="10">{{$cur->description}}</textarea>
+                      rows="10">{{old("description",$cur->description)}}</textarea>
         </div>
 
         <div class="form-group">
