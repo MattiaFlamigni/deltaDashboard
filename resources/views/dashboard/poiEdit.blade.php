@@ -27,7 +27,13 @@
                     <!-- Categoria -->
                     <div class="mb-3">
                         <label for="category" class="form-label">Categoria</label>
-                        <input type="text" class="form-control" name="category" id="category" value="{{ old('category', $poi->category) }}">
+
+                        <select name="category" id="category" class="form-select" required>
+                            @foreach($categorie as $cat)
+                            <option value="{{$cat}}"  @if($cat == $poi->category) selected @endif>{{$cat}}</option>
+                            @endforeach
+                        </select>
+
                     </div>
 
                     <!-- Coordinate -->

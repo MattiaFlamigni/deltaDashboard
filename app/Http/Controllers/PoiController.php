@@ -44,7 +44,8 @@ class PoiController extends Controller
      */
     public function edit(Poi $poi)
     {
-        return view("dashboard.poiEdit", ["poi" => $poi]);
+        $categorie = Poi::distinct()->pluck('category');
+        return view("dashboard.poiEdit", ["poi" => $poi, "categorie" => $categorie]);
     }
 
     /**
@@ -55,6 +56,7 @@ class PoiController extends Controller
         $validatedData = $request->validate([
             "title" => "required",
             "description" => "required",
+            'category' => 'required|string',
         ]);
 
         $poi->update($validatedData);
