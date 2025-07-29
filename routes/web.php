@@ -5,6 +5,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SpottedController;
 use App\Models\Curiosity;
+use App\Models\Poi;
 use App\Models\Point;
 use App\Models\Spotted;
 use App\Models\SupabaseUser;
@@ -26,7 +27,9 @@ Route::get('/', function () {
     //$spotted = Point::whereBetween('created_at', [$startOfMonth, $endOfMonth])->where("type", "Spotted")->get();
     $spotted = Spotted::all();
     $spottedMonth = Spotted::whereBetween('data', [$startOfMonth, $endOfMonth])->get();
-    return view('dashboard.dashboard', ["users"=>$users, "activeUsers"=>$activeUsers, "spotted"=>$spotted, "spottedMonth"=>$spottedMonth]);
+
+    $poi = Poi::all();
+    return view('dashboard.dashboard', ["users"=>$users, "activeUsers"=>$activeUsers, "spotted"=>$spotted, "spottedMonth"=>$spottedMonth, "poi"=>$poi]);
 });
 Route::get('/dashboard/detail', function (Request $request) {
     $startOfMonth = Carbon::now()->startOfMonth();
