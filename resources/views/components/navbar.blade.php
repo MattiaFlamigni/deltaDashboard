@@ -15,12 +15,21 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route("reports.index")}}">Reports</a>
             </li>
+            @if(Auth::user()->isAdmin)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route("admin.create")}}">Registra utente</a>
+                </li>
+
+            @endif
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::user()->email}}</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="dropdown-item" type="submit">Logout</button>
+                    </form>
                 </div>
             </li>
         </ul>
