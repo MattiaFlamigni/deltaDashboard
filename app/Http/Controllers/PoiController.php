@@ -41,15 +41,13 @@ class PoiController extends Controller
             'latitude' => $validatedData['latitude'],
             'longitude' => $validatedData['longitude'],
         ]);
-
         Poi::create([
             'title' => $validatedData['title'],
             'description' => $validatedData['description'],
             'category' => $validatedData['category'],
             'location' => $location,
         ]);
-
-        session()->flash("success", "Poi creato con succeso");
+        session()->flash("success", "POI creato con successo!");
         return redirect("/");
     }
 
