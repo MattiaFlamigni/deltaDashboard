@@ -89,11 +89,6 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         return view('dashboard.details', compact('title', 'data', 'filter', 'view'));
     })->name('dashboard.detail');
 
-    // Rotta di test DB
-    Route::get('/prova-db', function () {
-        return DB::table('reports')->limit(5)->get();
-    });
-
     Route::resource("admin", AdminController::class);
 
     // Risorse CRUD

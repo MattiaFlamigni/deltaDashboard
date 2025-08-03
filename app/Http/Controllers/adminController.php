@@ -13,7 +13,8 @@ class adminController extends Controller
      */
     public function index()
     {
-        return view('auth.register');
+        $users = User::paginate();
+        return view('admin.users', ["data" => $users]);
     }
 
     /**
