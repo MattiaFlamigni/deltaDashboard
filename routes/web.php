@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Rotte dashboard protette da auth (e verified se vuoi)
+
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
 
     // Dashboard principale
@@ -47,7 +47,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         return view('dashboard.dashboard', compact('users', 'activeUsers', 'spotted', 'spottedMonth', 'poi'));
     })->name('dashboard.index');
 
-    // Rotta dettaglio con filtro
+
     Route::get('/detail', function (Request $request) {
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
