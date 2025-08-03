@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CuriosityController;
 use App\Http\Controllers\PoiController;
@@ -92,6 +93,8 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::get('/prova-db', function () {
         return DB::table('reports')->limit(5)->get();
     });
+
+    Route::resource("admin", AdminController::class);
 
     // Risorse CRUD
     Route::resource('curiosity', CuriosityController::class);
