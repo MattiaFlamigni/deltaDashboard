@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class adminController extends Controller
@@ -13,8 +14,11 @@ class adminController extends Controller
      */
     public function index()
     {
-        $users = User::paginate();
-        return view('admin.users', ["data" => $users]);
+        if(Auth::user()->isAdmin) {
+            $users = User::paginate();
+            return view('admin.users', ["data" => $users]);
+        }
+        abort(403, 'Accesso negato');
     }
 
     /**
@@ -22,7 +26,10 @@ class adminController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        if(Auth::user()->isAdmin) {
+            return view('auth.register');
+        }
+        abort(403, 'Accesso negato');
     }
 
     /**
