@@ -38,16 +38,20 @@ class adminController extends Controller
      */
     public function store(Request $request)
     {
+        // Se il checkbox è selezionato, vale true, altrimenti false
+        $isAdmin = $request->has('isAdmin');
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|unique:admin_users',
             'password' => 'required|string|min:8',
+            'isAdmin' => 'boolean',
         ]);
 
         User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
+            'isAdmin' => $isAdmin,
         ]);
 
         return redirect()->back()->with('success', 'Utente registrato con successo.');
