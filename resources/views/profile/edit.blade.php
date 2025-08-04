@@ -5,6 +5,10 @@
         </h2>
     </x-slot>
 
+    <div class="mb-4 mt-4 text-center">
+        <a class="btn btn-primary" href="{{ route('dashboard.index') }}" role="button"> ← Torna alla dashboard</a>
+    </div>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
