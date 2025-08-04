@@ -1,6 +1,7 @@
 @extends("templates.default")
 
 @section("content")
+    @include("partials.displayErrors")
     <div class="container py-4">
         <div class="row gx-5 gy-4">
             <!-- Staff Users Table -->
@@ -17,6 +18,7 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
                             <th scope="col" style="width: 100px;">Ruolo</th>
+                            <th scope="col">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -31,6 +33,15 @@
                                     @else
                                         <span class="badge bg-secondary">User</span>
                                     @endif
+                                </td>
+                                <td>
+                                    <form action="{{route("admin.destroy", $item)}}" method="POST">
+                                        @csrf
+                                        @method("DELETE")
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Elimina">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty

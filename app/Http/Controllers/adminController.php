@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -79,8 +80,13 @@ class adminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        if(Auth::user()->isAdmin) {
+            $user->delete();
+            session()->flash('success', 'Utente eliminato con successo.');
+            return redirect("/dashboard/admin");
+        }
+        abort(403, 'Accesso negato');
     }
 }
