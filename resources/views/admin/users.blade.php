@@ -42,6 +42,10 @@
                                             <i class="bi bi-trash-fill"></i>
                                         </button>
                                     </form>
+                                    <a href="{{ route('admin.edit', $item) }}"
+                                       class="btn btn-sm btn-outline-primary" title="Modifica">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @empty

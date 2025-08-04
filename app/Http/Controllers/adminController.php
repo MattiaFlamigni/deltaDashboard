@@ -68,17 +68,31 @@ class adminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('admin.editUser', ['admin' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required',
+            'isAdmin' => 'boolean',
+        ]);
+
+        $isAdmin = $request->has('isAdmin');
+
+        $user->update([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'isAdmin' => $isAdmin,
+        ]);
+        session()->flash('success', 'Utente modificato con successo.');
+        return redirect("/dashboard/admin");
     }
 
     /**
