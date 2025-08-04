@@ -89,7 +89,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         return view('dashboard.details', compact('title', 'data', 'filter', 'view'));
     })->name('dashboard.detail');
 
-    Route::resource("admin", AdminController::class);
+    Route::resource("admin", AdminController::class)->parameters([
+        'admin' => 'user'
+    ]);
 
     // Risorse CRUD
     Route::resource('curiosity', CuriosityController::class);
