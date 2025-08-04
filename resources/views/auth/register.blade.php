@@ -49,9 +49,11 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
-        <div class="mt-4">
-            <label for="isAdmin"> Admin</label><br>
-            <input type="checkbox" id="isAdmin" name="isAdmin" value="0">
+        <div class="form-check mt-4">
+            <input class="form-check-input" type="checkbox" id="isAdmin" name="isAdmin" value="1">
+            <label class="form-check-label" for="isAdmin">
+                Admin
+            </label>
         </div>
 
 
