@@ -45,7 +45,45 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         $spottedMonth = Spotted::whereBetween('data', [$startOfMonth, $endOfMonth])->get();
         $poi = Poi::all();
 
-        return view('dashboard.dashboard', compact('users', 'activeUsers', 'spotted', 'spottedMonth', 'poi'));
+        // Grafico a torta - spot per categoria
+        $spotPerCategoria = DB::table('spotted')
+            ->select('category', DB::raw('COUNT(*) as totale'))
+            ->groupBy('category')
+            ->orderBy('totale', 'desc')
+            ->get();
+
+        $labelsPie = [];
+        $dataPie = [];
+
+        foreach ($spotPerCategoria as $record) {
+            $labelsPie[] = $record->category;
+            $dataPie[] = $record->totale;
+        }
+
+        // Grafico a barre - spot per mese
+        $spottedThisYear = Spotted::whereYear('data', now()->year)->get();
+
+        // Raggruppo per numero del mese (1-12) per mantenere ordine corretto
+        $grouped = $spottedThisYear->groupBy(function ($item) {
+            return $item->data->timezone('Europe/Rome')->format('n'); // numero mese senza zero davanti
+        });
+
+        $labels = [];
+        $data = [];
+
+        // Ordino per numero mese e formatto in nome mese in italiano
+        for ($month = 1; $month <= 12; $month++) {
+            if ($grouped->has($month)) {
+                $labels[] = Carbon::create()->month($month)->locale('it')->isoFormat('MMMM'); // gennaio, febbraio...
+                $data[] = $grouped[$month]->count();
+            }
+        }
+
+        return view('dashboard.dashboard', compact(
+            'users', 'activeUsers', 'spotted', 'spottedMonth', 'poi',
+            'labels', 'data',
+            'labelsPie', 'dataPie'
+        ));
     })->name('dashboard.index');
 
 

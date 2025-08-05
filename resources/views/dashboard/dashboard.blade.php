@@ -16,7 +16,7 @@
 
     <!-- jQuery (prima di Bootstrap JS!) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -125,6 +125,63 @@
 
 <script src="{{ asset('js/scripts.js') }}"></script>
 <script src="{{ asset('js/datatables-simple-demo.js') }}"></script>
+<script>
+    const labels = @json($labels);
+    const data = @json($data);
+
+    const labelsPie = @json($labelsPie);
+    const dataPie = @json($dataPie);
+
+    // Grafico a torta (Spot per categoria)
+    const ctxPie = document.getElementById('myPieChart').getContext('2d');
+    new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: labelsPie,
+            datasets: [{
+                label: 'Spot per categoria',
+                data: dataPie,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true }
+            }
+        }
+    });
+
+    // Grafico a barre (Spot per mese)
+    const ctxBar = document.getElementById('myBarChart').getContext('2d');
+    new Chart(ctxBar, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Spot per mese',
+                data: data,
+                backgroundColor: 'rgba(28, 200, 138, 0.5)',
+                borderColor: 'rgba(28, 200, 138, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+
 </body>
 <x-footer/>
 </html>
