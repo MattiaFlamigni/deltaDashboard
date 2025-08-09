@@ -9,6 +9,8 @@ class quizQuestion extends Model
     protected $table = 'questionsQuiz';
     protected $fillable = ["question"];
 
+    public $timestamps = false;
+
 
     function answers()
     {

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class quizAnswer extends Model
 {
     protected $table = 'answer';
+    public $timestamps = false;
+
+    protected $fillable = ["answer", "correct", "questionID"];
 
 
     function question()

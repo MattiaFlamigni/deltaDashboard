@@ -13,7 +13,7 @@ class quizController extends Controller
     public function index()
     {
 
-        $quizQuestions = quizQuestion::paginate(7);
+        $quizQuestions = quizQuestion::orderBy('created_at', 'desc')->paginate(7);
 
 
         return view('quiz.quiz', compact('quizQuestions'));
@@ -24,7 +24,7 @@ class quizController extends Controller
      */
     public function create()
     {
-        //
+        return view('quiz.questionCreate');
     }
 
     /**
@@ -32,8 +32,27 @@ class quizController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'question' => 'required|string',
+            'answers' => 'required|array|min:4|max:4',
+            'answers.*' => 'required|string',
+            'correct_answer' => 'required|integer|min:0|max:3',
+        ]);
+
+        $question = quizQuestion::create(['question' => $data['question']]);
+
+        foreach ($data['answers'] as $index => $answerText) {
+            $question->answers()->create([
+                'answer' => $answerText,
+                'correct' => $index == $data['correct_answer'],
+            ]);
+        }
+
+        session()->flash('success', 'domanda creata con successo');
+
+        return redirect("/dashboard/quiz");
     }
+
 
     /**
      * Display the specified resource.

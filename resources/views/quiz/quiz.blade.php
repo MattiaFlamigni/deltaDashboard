@@ -1,7 +1,7 @@
 @extends("templates.default")
 
 @section("content")
-
+@include("partials.displayErrors")
 <div class="container my-4">
     @foreach ($quizQuestions as $index => $question)
         <div class="card mb-3 shadow-sm">
