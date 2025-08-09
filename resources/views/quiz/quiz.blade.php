@@ -1,0 +1,31 @@
+@extends("templates.default")
+
+@section("content")
+
+<div class="container my-4">
+    @foreach ($quizQuestions as $index => $question)
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Domanda {{ $index + 1 }}:</h5>
+                <p class="card-text fw-semibold">{{ $question['question'] }}</p>
+
+                <ul class="list-group">
+                    @foreach ($question->answers as $key => $option)
+                        <li class="list-group-item d-flex justify-content-between align-items-center
+                            @if ($option->correct)
+                                list-group-item-success
+                            @endif
+                        ">
+                            {{ $option->answer }}
+
+                            @if ($option->correct)
+                                <span class="badge bg-success">Corretta</span>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    @endforeach
+</div>
+@endsection

@@ -131,6 +131,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         'admin' => 'user'
     ]);
 
+
+    Route::resource("quiz", \App\Http\Controllers\quizController::class);
+
     // Risorse CRUD
     Route::resource('curiosity', CuriosityController::class);
     Route::resource('reports', ReportController::class);
