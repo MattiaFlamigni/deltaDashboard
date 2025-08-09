@@ -13,7 +13,7 @@ class quizController extends Controller
     public function index()
     {
 
-        $quizQuestions = quizQuestion::all();
+        $quizQuestions = quizQuestion::paginate(7);
 
 
         return view('quiz.quiz', compact('quizQuestions'));

@@ -26,6 +26,11 @@
                 </ul>
             </div>
         </div>
+
+
     @endforeach
+</div>
+<div class="mt-3 d-flex justify-content-end">
+    {{ $quizQuestions->links('vendor.pagination.bootstrap-5') }}
 </div>
 @endsection
