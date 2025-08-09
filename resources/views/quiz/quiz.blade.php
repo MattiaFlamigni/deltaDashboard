@@ -25,8 +25,22 @@
                     @endforeach
                 </ul>
             </div>
-        </div>
 
+
+
+            <div class="container">
+                <form action="{{route("quiz.destroy", $question->id)}}" method="POST">
+                    @csrf
+                    @method("DELETE")
+
+                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Elimina">
+                        <i class="bi bi-trash-fill"></i>
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
 
     @endforeach
 </div>

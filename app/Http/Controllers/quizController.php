@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\quizAnswer;
 use App\Models\quizQuestion;
 use Illuminate\Http\Request;
 
@@ -83,6 +84,12 @@ class quizController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Elimino tutte le risposte collegate alla domanda
+        quizAnswer::where('questionID', $id)->delete();
+
+        // Elimino la domanda stessa
+        quizQuestion::destroy($id);
+        session()->flash('success', 'domanda eliminata con successo');
+        return redirect("/dashboard/quiz");
     }
 }
