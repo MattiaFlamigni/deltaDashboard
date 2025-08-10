@@ -18,7 +18,7 @@
                 <a class="nav-link" href="{{route("reports.index")}}">Reports</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Quiz</a>
+                <a class="nav-link" href="{{route("quiz.index")}}">Quiz</a>
             </li>
 
             @if(Auth::user()->isAdmin)
