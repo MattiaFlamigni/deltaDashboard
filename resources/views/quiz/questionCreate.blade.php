@@ -25,7 +25,7 @@
             <label class="form-label">Risposta Corretta</label>
             <div>
                 @for ($i = 0; $i < 4; $i++)
-                    <div class="form-check form-check-inline">
+                    <div class="form-check ">
                         <input class="form-check-input" type="radio" name="correct_answer" id="correct_answer_{{ $i }}" value="{{ $i }}" {{ old('correct_answer') == $i ? 'checked' : '' }} required>
                         <label class="form-check-label" for="correct_answer_{{ $i }}">Risposta {{ $i + 1 }}</label>
                     </div>
