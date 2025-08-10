@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\quizAnswer;
 use App\Models\quizQuestion;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Question\Question;
 
 class quizController extends Controller
 {
@@ -66,18 +67,39 @@ class quizController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(quizQuestion $quiz)
     {
-        //
+        return view("quiz.questionEdit", compact('quiz'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, quizQuestion $quiz)
     {
-        //
+        $data = $request->validate([
+            'question' => 'required|string',
+            'answers' => 'required|array|min:4|max:4',
+            'answers.*' => 'required|string',
+            'correct_answer' => 'required|integer|min:0|max:3',
+        ]);
+
+        // Aggiorno solo la domanda
+        $quiz->update([
+            'question' => $data['question']
+        ]);
+
+        // Aggiorno le risposte esistenti
+        foreach ($quiz->answers as $index => $answer) {
+            $answer->update([
+                'answer' => $data['answers'][$index],
+                'correct' => $index == $data['correct_answer'],
+            ]);
+        }
+
+        return redirect("/dashboard/quiz");
     }
+
 
     /**
      * Remove the specified resource from storage.

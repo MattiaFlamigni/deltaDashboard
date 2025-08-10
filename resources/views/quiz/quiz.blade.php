@@ -38,6 +38,9 @@
                     </button>
 
                 </form>
+
+                <a href="{{route("quiz.edit", $question)}}" class="btn btn-primary" role="button"><i class="bi bi-pencil-fill"></i></a>
+
             </div>
 
         </div>
