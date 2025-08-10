@@ -23,29 +23,44 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($openReports as $report) {{-- supponendo $openReports --}}
-                        <tr>
-                            <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $report->data }}</td>
-                            <td>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}">
-                                    <img src="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}" width="60" height="60" alt="img" style="cursor:pointer;">
-                                </a>
-                            </td>
-                            <td>{{ $report->comment }}</td>
-                            <td>{{ $report->type }}</td>
-                            <td>{{ $report->position }}</td>
-                            <td>{{ $report->verified }}</td>
-                            <td>
-                                <form action="{{route("reports.update", $report)}}" method="POST" style="display:inline-block;">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" class="btn btn-sm btn-outline-success" title="Apri">
-                                        <i class="bi bi-check-circle"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                        @foreach($openReports as $report)
+                            {{-- supponendo $openReports --}}
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $report->data }}</td>
+                                <td>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
+                                       data-img="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}">
+                                        <img
+                                            src="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}"
+                                            width="60" height="60" alt="img" style="cursor:pointer;">
+                                    </a>
+                                </td>
+                                <td>{{ $report->comment }}</td>
+                                <td>{{ $report->type }}</td>
+                                <td>
+
+                                    @if (is_array($report->position) && count($report->position) >= 2)
+                                        <a href="https://www.google.com/maps?q={{ $report->position[0] }},{{ $report->position[1] }}"
+                                           target="_blank" class="text-decoration-none">
+                                            📍 {{ number_format((float)$report->position[0], 3) }}
+                                            , {{ number_format((float)$report->position[1], 3) }}
+                                        </a>
+                                    @else
+                                        <span class="text-muted">Posizione non disponibile</span>
+                                @endif
+                                <td>{{ $report->verified }}</td>
+                                <td>
+                                    <form action="{{route("reports.update", $report)}}" method="POST"
+                                          style="display:inline-block;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="btn btn-sm btn-outline-success" title="Apri">
+                                            <i class="bi bi-check-circle"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                         @endforeach
                         </tbody>
                     </table>
@@ -73,30 +88,47 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($closedReports as $report) {{-- supponendo $closedReports --}}
-                        <tr>
-                            <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $report->data }}</td>
-                            <td>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}">
-                                    <img src="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}" width="60" height="60" alt="img" style="cursor:pointer;">
-                                </a>
-                            </td>
-                            <td>{{ $report->comment }}</td>
-                            <td>{{ $report->type }}</td>
-                            <td>{{ $report->position }}</td>
-                            <td>{{ $report->verified }}</td>
-                            <td>
+                        @foreach($closedReports as $report)
+                            {{-- supponendo $closedReports --}}
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $report->data }}</td>
+                                <td>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
+                                       data-img="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}">
+                                        <img
+                                            src="https://cvperzyahqhkdcjjtqvm.supabase.co/storage/v1/object/public/{{ $report->image_path }}"
+                                            width="60" height="60" alt="img" style="cursor:pointer;">
+                                    </a>
+                                </td>
+                                <td>{{ $report->comment }}</td>
+                                <td>{{ $report->type }}</td>
+                                <td>
 
-                                <form action="{{route("reports.update", $report)}}" method="POST" style="display:inline-block;">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Apri">
-                                        <i class="bi bi-check-circle"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                                    @if (is_array($report->position) && count($report->position) >= 2)
+                                        <a href="https://www.google.com/maps?q={{ $report->position[0] }},{{ $report->position[1] }}"
+                                           target="_blank" class="text-decoration-none">
+                                            📍 {{ number_format((float)$report->position[0], 3) }}
+                                            , {{ number_format((float)$report->position[1], 3) }}
+                                        </a>
+                                    @else
+                                        <span class="text-muted">Posizione non disponibile</span>
+                                    @endif
+
+                                </td>
+                                <td>{{ $report->verified }}</td>
+                                <td>
+
+                                    <form action="{{route("reports.update", $report)}}" method="POST"
+                                          style="display:inline-block;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Apri">
+                                            <i class="bi bi-check-circle"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                         @endforeach
                         </tbody>
                     </table>
