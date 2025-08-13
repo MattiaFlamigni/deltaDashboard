@@ -58,7 +58,7 @@ class ReportController extends Controller
             'isResolved' => !$report->isResolved
         ]);
 
-        return redirect("/dashboard/reports");
+        return redirect(route("reports.index"));
     }
 
     /**
