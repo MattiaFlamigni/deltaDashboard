@@ -33,7 +33,25 @@
                             <td>{{ $spot->comment }}</td>
                             <td>{{ $spot->category }}</td>
                             <td>{{ $spot->subCategory }}</td>
-                            <td>{{ $spot->location }}</td>
+                            <td>
+                                @php
+                                    $location = json_decode($spot->location, true);
+                                @endphp
+
+                                @if($location)
+                                    <a  href="https://www.google.com/maps?q={{ $location["latitude"] }},{{ $location['longitude'] }}"
+                                        target="_blank" class="text-decoration-none">
+                                        📍
+                                        {{ number_format($location['latitude'],3) }},
+                                        {{ number_format($location['longitude'],3) }}
+                                    </a>
+                                @else
+                                    Non disponibile
+                                @endif
+
+
+
+                            </td>
                             <td>
                                 <a href="{{ route('spotted.edit', $spot) }}"> <i class="bi bi-pencil-fill"></i></a>
 
