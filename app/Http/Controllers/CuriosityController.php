@@ -36,7 +36,7 @@ class CuriosityController extends Controller
         ]);
       Curiosity::create($request->all());
       session()->flash('success', 'Curiosità creata con successo');
-      return redirect("/curiosity");
+      return redirect(route('curiosity.index'));
     }
 
     /**
@@ -73,7 +73,7 @@ class CuriosityController extends Controller
         ];
         $curiosity->update($data);
         session()->flash('success', 'Curiosità aggiornata con successo');
-        return redirect("/curiosity");
+        return redirect(route("curiosity.index"));
     }
 
     /**
@@ -84,6 +84,6 @@ class CuriosityController extends Controller
         Curiosity::destroy($id);
 
         session()->flash('success', 'Curiosità eliminata con successo');
-        return redirect('/curiosity');
+        return redirect(route("curiosity.index"));
     }
 }

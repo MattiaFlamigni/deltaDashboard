@@ -48,7 +48,7 @@ class PoiController extends Controller
             'location' => $location,
         ]);
         session()->flash("success", "POI creato con successo!");
-        return redirect("/");
+        return redirect(route("dashboard.index"));
     }
 
 
@@ -96,7 +96,7 @@ class PoiController extends Controller
 
         $poi->save();
         session()->flash('success', 'POI modificato con successo');
-        return redirect("/");
+        return redirect(route("dashboard.index"));
     }
 
     /**
@@ -106,6 +106,6 @@ class PoiController extends Controller
     {
         $poi->delete();
         session()->flash('success', 'POI eliminato con successo');
-        return redirect("/");
+        return redirect(route("dashboard.index"));
     }
 }
